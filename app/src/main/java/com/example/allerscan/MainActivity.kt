@@ -1,6 +1,5 @@
 package com.example.allerscan
 
-import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +9,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.allerscan.databinding.ActivityMainBinding
 import com.example.allerscan.R
-import com.example.allerscan.QrScanActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,8 +38,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.navigation_qr -> {
-                    val intent = Intent(this, QrScanActivity::class.java)
-                    startActivity(intent)
+                    navController.navigate(R.id.navigation_qr)
                     true
                 }
                 R.id.navigation_notifications -> {
