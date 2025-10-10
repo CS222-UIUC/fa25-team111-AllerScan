@@ -1,4 +1,4 @@
-package com.example.allerscan.ui.qrscan
+package com.example.allerscan
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.allerscan.databinding.FragmentQrScanBinding
@@ -20,14 +19,13 @@ class QrScanFragment : Fragment() {
     private val binding get() = _binding!!
 
     companion object {
-        private const val CAMERA_PERMISSION_CODE = 100
+        private const val CAMERA_PERMISSION_CODE = 101
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentQrScanBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -42,13 +40,15 @@ class QrScanFragment : Fragment() {
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == CAMERA_PERMISSION_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 startCamera()
             } else {
-                Toast.makeText(requireContext(), "Camera permission is required for scanning.", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Camera permission is required for scanning.", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -63,7 +63,7 @@ class QrScanFragment : Fragment() {
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
             try {
                 cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(viewLifecycleOwner, cameraSelector, preview)
+                cameraProvider.bindToLifecycle(this, cameraSelector, preview)
             } catch (e: Exception) {
                 android.util.Log.e("QrScanFragment", "Camera binding failed", e)
             }

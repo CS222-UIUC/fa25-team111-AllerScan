@@ -1,7 +1,4 @@
-package com.example.allerscan.ui.qrscan
+package com.example.allerscan.ui.QrScan
 
-import androidx.lifecycle.ViewModel
-
-class QrScanViewModel : ViewModel() {
+class QrScanViewModel {
 }
-
