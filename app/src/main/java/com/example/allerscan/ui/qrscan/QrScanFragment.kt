@@ -1,4 +1,4 @@
-package com.example.allerscan
+package com.example.allerscan.ui.qrscan
 
 import android.Manifest
 import android.content.pm.PackageManager
