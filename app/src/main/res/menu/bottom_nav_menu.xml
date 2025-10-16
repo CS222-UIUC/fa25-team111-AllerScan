@@ -10,8 +10,8 @@
         android:icon="@drawable/ic_qr_code_black_24dp"
         android:title="@string/title_qr" />
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_profile_black_24dp"
-        android:title="@string/title_notifications" />
+        android:title="@string/title_profile" />
 
 </menu>
