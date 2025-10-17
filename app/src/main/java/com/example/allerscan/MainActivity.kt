@@ -10,6 +10,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.allerscan.databinding.ActivityMainBinding
 import com.example.allerscan.R
 import android.util.Log
+import com.example.allerscan.BarcodeIngredientLookup
+import com.example.allerscan.AllergenChecker
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,25 +19,28 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        //ingredient fetch test with oreo barcode
-//        val lookupTest = BarcodeIngredientLookup()
-//        val barcode = "044000047009"
-//        Thread {
-//            val ingredients = lookupTest.lookupOpenFoodFacts(barcode)
-//            Log.d("MainActivity", "Test for BarcodeIngredientLookup: $ingredients")
-//        }.start()
-        //ingredient fetch test with peanut barcode
-//        val lookupTest2 = BarcodeIngredientLookup()
-//        val barcode2 = "051500241776"
-//        Thread {
-//            val ingredients2 = lookupTest.lookupOpenFoodFacts(barcode)
-//            Log.d("MainActivity", "Test for BarcodeIngredientLookup2: $ingredients2")
-//        }.start()
-
+        Log.d("MainActivity", "STARTED!!!")
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //ingredient fetch test with oreo barcode "044000047009"
+        val test = BarcodeIngredientLookup()
+        test.lookupOpenFoodFacts("044000047009") { ingredients ->
+            if (ingredients.isNotEmpty()) {
+                Log.d("MainActivity", "Test Oreo Ingredients: $ingredients")
+            } else {
+                Log.e("MainActivity", "Test Oreo Ingredients not found/request failed")
+            }
+        }
+        //ingredient fetch test with peanut butter barcode "051500241776"
+        test.lookupOpenFoodFacts("051500241776") { ingredients ->
+            if (ingredients.isNotEmpty()) {
+                Log.d("MainActivity", "Test Peanut Butter Ingredients: $ingredients")
+            } else {
+                Log.e("MainActivity", "Test Peanut Butter Ingredients found/request failed")
+            }
+        }
 
         val navView: BottomNavigationView = binding.navView
 
