@@ -2,8 +2,9 @@ package com.example.allerscan
 
 import android.util.Log
 
-//Simple Class to Check if allergen is within ingredients
+//Checks if allergen is within ingredients
 //Should be updated when user adds allergy in profile
+//Must be tied to frontend/UI
 class AllergenChecker {
     //user enters in their allergens to list/map
     val allergenMap = mutableMapOf(
@@ -30,14 +31,16 @@ class AllergenChecker {
     fun foodSafe(ingredients: MutableList<String>): Int {
         //function check ingredient list according to allergenMap
         if (ingredients.isEmpty()) {
-            Log.e("Allergens", "No Ingredients to Verify")
+            Log.e("Allergens", "Unknown/Proceed with Caution")
             return 1;
         }
         for (ingredient in ingredients) {
             if (allergenMap[ingredient] == true) {
+                Log.d("Allergens", "Allergen is Found")
                 return 2;
             }
         }
+        Log.d("Allergens", "No Allergens Found")
         return 0;
     }
 }
