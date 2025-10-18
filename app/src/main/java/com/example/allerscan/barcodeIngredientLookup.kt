@@ -85,8 +85,8 @@ class BarcodeIngredientLookup {
     //attempt to fetch ingredients using OpenFoodFacts API
     fun lookupOpenFoodFacts(barcode: String, callback: (String) -> Unit) {
         //https://openfoodfacts.github.io/openfoodfacts-server/api/
-        //using a JavaScript example from the Open Food Facts Documentation
-        //Some of the code in this function was referenced from an example generated from ChatGPT
+        //Using a JavaScript example from the Open Food Facts Documentation
+        //The code in this function used/referenced an example generated from ChatGPT
         //specifically how to make asynchronous calls and the authorization in Kotlin
         //The code has been edited to work in for the specific function
         //Check Logcat for functionality

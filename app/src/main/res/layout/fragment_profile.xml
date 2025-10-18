@@ -19,7 +19,6 @@
         android:layout_height="wrap_content"
         android:visibility="gone" 
     app:constraint_referenced_ids="text_welcome_message,button_edit_profile" />
-    
 
     <TextView
         android:id="@+id/label_first_name"
@@ -111,5 +110,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button_edit_profile"
         app:layout_constraintTop_toTopOf="@+id/button_edit_profile" />
+
+    <SearchView
+        android:id="@+id/searchHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="Enter Allergies..."
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_save_profile" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
