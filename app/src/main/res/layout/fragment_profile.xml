@@ -74,7 +74,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- ==== DISPLAY MODE UI ==== -->
+    <!-- DISPLAY MODE UI -->
 
     <TextView
         android:id="@+id/text_welcome_message"
@@ -82,19 +82,19 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@id/button_edit_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
-        tools:text="Welcome, First Last" /> <!-- tools:text shows a preview in the editor -->
-
+        tools:text="Welcome, First Last" />
+    <!-- My thinking   -->
     <Button
         android:id="@+id/button_edit_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Edit"
+        android:text="Edit Profile"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,7 +108,7 @@
         android:text="Delete"
         android:backgroundTint="#FF0000"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/button_edit_profile"
         app:layout_constraintStart_toEndOf="@+id/button_edit_profile"
         app:layout_constraintTop_toTopOf="@+id/button_edit_profile" />
 
