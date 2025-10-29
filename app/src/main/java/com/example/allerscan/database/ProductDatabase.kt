@@ -6,23 +6,26 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Product::class], version = 1)
+@Database(entities = [Product::class, Allergen::class], version = 2, exportSchema = false)
 abstract class ProductDatabase : RoomDatabase() {
     abstract fun productDao(): ProductDao
+    abstract fun allergenDao(): AllergenDao
 
     // This is a simple singleton pattern
     companion object {
-        private var instance: ProductDatabase? = null
+        @Volatile private var instance: ProductDatabase? = null
 
         fun getDatabase(context: Context): ProductDatabase {
-            if (instance == null) {
-                instance = Room.databaseBuilder(
+            return instance ?: synchronized(this) {
+                instance ?: Room.databaseBuilder(
                     context.applicationContext,
                     ProductDatabase::class.java,
                     "product_database"
-                ).build()
+                )
+                    .allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
+                    .build().also { instance = it }
             }
-            return instance!!
         }
     }
 }
