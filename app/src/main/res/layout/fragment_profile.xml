@@ -11,7 +11,7 @@
         android:id="@+id/group_edit_mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="label_first_name,input_first_name,label_last_name,input_last_name,button_save_profile, button_delete_profile"
+        app:constraint_referenced_ids="label_first_name,input_first_name,label_last_name,input_last_name,button_save_profile, button_delete_profile, allergen_box_1, allergen_box_2, allergen_box_3, allergen_box_4, allergen_box_5, allergen_box_6, allergen_box_7, allergen_box_8, allergen_box_9, allergen_box_10"
         android:visibility="visible"
         />
 
@@ -68,7 +68,103 @@
         app:layout_constraintStart_toStartOf="@+id/label_last_name"
         app:layout_constraintTop_toBottomOf="@id/label_last_name" />
 
+    <!-- ALLERGEN SELECTION GRID -->
+
+    <CheckBox
+        android:id="@+id/allergen_box_1"
+        style="@style/AllergenBox"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toStartOf="@+id/allergen_box_2"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_last_name"
+        app:layout_constraintBottom_toTopOf="@id/allergen_box_3"
+        android:text="🥛 Milk"
+        />
+
+    <CheckBox
+        android:id="@+id/allergen_box_2"
+        style="@style/AllergenBox"
+        android:text="🥚 Egg"
+        app:layout_constraintBottom_toTopOf="@id/allergen_box_4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/allergen_box_4"
+        app:layout_constraintTop_toBottomOf="@+id/input_last_name"
+        app:layout_constraintVertical_bias="0.464" />
+
+    <CheckBox
+        android:id="@+id/allergen_box_4"
+        style="@style/AllergenBox"
+        android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toBottomOf="@id/allergen_box_3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/allergen_box_3"
+        app:layout_constraintTop_toTopOf="@id/allergen_box_3"
+        app:layout_constraintVertical_bias="1.0"
+        android:text="🌱 Soy"
+        />
+
+    <CheckBox
+        android:id="@+id/allergen_box_3"
+        style="@style/AllergenBox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/allergen_box_4"
+        app:layout_constraintTop_toBottomOf="@id/allergen_box_1"
+        android:text="🥜 Peanut"/>
+
+    <!-- Repeat for boxes 5 through 10 -->
+
+    <CheckBox
+        android:id="@+id/allergen_box_5"
+        style="@style/AllergenBox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/allergen_box_6"
+        app:layout_constraintTop_toBottomOf="@id/allergen_box_3"
+        android:text="🌾 Wheat"/>
+
+    <CheckBox
+        android:id="@+id/allergen_box_6"
+        style="@style/AllergenBox"
+        app:layout_constraintBottom_toBottomOf="@id/allergen_box_5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/allergen_box_5"
+        app:layout_constraintTop_toTopOf="@id/allergen_box_5"
+        app:layout_constraintVertical_bias="1.0"
+        android:text="🌰 Tree Nut"/>
+
+    <CheckBox
+        android:id="@+id/allergen_box_7"
+        style="@style/AllergenBox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/allergen_box_8"
+        app:layout_constraintTop_toBottomOf="@id/allergen_box_5"
+        android:text="🦐 Shellfish"/>
+
+    <CheckBox
+        android:id="@+id/allergen_box_8"
+        style="@style/AllergenBox"
+        app:layout_constraintBottom_toBottomOf="@id/allergen_box_7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/allergen_box_7"
+        app:layout_constraintTop_toTopOf="@id/allergen_box_7"
+        app:layout_constraintVertical_bias="1.0"
+        android:text="🐟 Fish"
+        />
+
+
     <!-- DISPLAY MODE UI -->
+
+    <CheckBox
+        android:id="@+id/allergen_box_9"
+        style="@style/AllergenBox"
+        android:layout_marginTop="16dp"
+        android:text="🍞 Sesame"
+        app:layout_constraintEnd_toEndOf="@id/allergen_box_8"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@id/allergen_box_7"
+        app:layout_constraintTop_toBottomOf="@id/allergen_box_7" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_save_profile"
