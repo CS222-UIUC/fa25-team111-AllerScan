@@ -1,49 +1,43 @@
+// File: 'app/src/main/java/com/example/allerscan/ui/qrscan/QrScanFragment.kt'
 package com.example.allerscan.ui.qrscan
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.camera.core.*
-import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import com.example.allerscan.databinding.FragmentQrScanBinding
-import com.google.mlkit.vision.barcode.BarcodeScanner
-import com.google.mlkit.vision.barcode.BarcodeScannerOptions
-import com.google.mlkit.vision.barcode.BarcodeScanning
-import com.google.mlkit.vision.barcode.common.Barcode
-import com.google.mlkit.vision.common.InputImage
+import com.journeyapps.barcodescanner.BarcodeCallback
+import com.journeyapps.barcodescanner.camera.CameraSettings
+import com.google.zxing.BarcodeFormat
 import com.example.allerscan.BarcodeIngredientLookup
-import com.example.allerscan.database.Product
-import java.util.concurrent.Executors
 import com.example.allerscan.AllergenChecker
+import com.example.allerscan.database.Product
 
 class QrScanFragment : Fragment() {
     private var _binding: FragmentQrScanBinding? = null
     private val binding get() = _binding!!
-    private var cameraProvider: ProcessCameraProvider? = null
-    private var camera: Camera? = null
+    private val vm by viewModels<QrScanViewModel>()
     private var isScanning = true
     private var lastScannedCode: String? = null
     private var lastScanTime = 0L
-    private val vm by viewModels<QrScanViewModel>()
-    private lateinit var barcodeScanner: BarcodeScanner
-    private val cameraExecutor = Executors.newSingleThreadExecutor()
 
-    companion object {
-        private const val CAMERA_PERMISSION_CODE = 101
+    private val barcodeCallback = BarcodeCallback { result ->
+        if (result == null || !isScanning) return@BarcodeCallback
+
+        // Debounce: prevent duplicate scans within 3 seconds
+        val now = System.currentTimeMillis()
+        if (result.text == lastScannedCode && (now - lastScanTime) < 3000) {
+            return@BarcodeCallback
+        }
+
+        lastScannedCode = result.text
+        lastScanTime = now
+        handleBarcodeScan(result.text)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentQrScanBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -51,109 +45,104 @@ class QrScanFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         vm.ensureDefaults()
-        setupBarcodeScanner()
-        setupUI()
 
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
-            != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION_CODE)
-        } else {
-            startCamera()
+        // Configure camera settings to fix mirroring
+        val cameraSettings = CameraSettings()
+        cameraSettings.requestedCameraId = -1 // Use back camera
+        cameraSettings.isAutoFocusEnabled = true
+        cameraSettings.isContinuousFocusEnabled = true
+        binding.barcodeScanner.barcodeView.cameraSettings = cameraSettings
+
+        // Remove status text and hide laser line
+        binding.barcodeScanner.setStatusText("")
+
+        // Try to disable laser if the method exists
+        try {
+            binding.barcodeScanner.viewFinder.setLaserVisibility(false)
+        } catch (e: Exception) {
+            // Method might not exist in this version
         }
-    }
 
-    private fun setupBarcodeScanner() {
-        val options = BarcodeScannerOptions.Builder()
-            .setBarcodeFormats(
-                Barcode.FORMAT_QR_CODE,
-                Barcode.FORMAT_EAN_13,
-                Barcode.FORMAT_EAN_8,
-                Barcode.FORMAT_UPC_A,
-                Barcode.FORMAT_UPC_E,
-                Barcode.FORMAT_CODE_128,
-                Barcode.FORMAT_CODE_39
-            )
-            .build()
-        barcodeScanner = BarcodeScanning.getClient(options)
-    }
+        // Set supported barcode formats
+        val formats = listOf(
+            BarcodeFormat.QR_CODE,
+            BarcodeFormat.CODE_128,
+            BarcodeFormat.CODE_39,
+            BarcodeFormat.EAN_13,
+            BarcodeFormat.EAN_8,
+            BarcodeFormat.UPC_A,
+            BarcodeFormat.UPC_E
+        )
+        binding.barcodeScanner.barcodeView.decoderFactory =
+            com.journeyapps.barcodescanner.DefaultDecoderFactory(formats)
 
-    private fun setupUI() {
+        // Start continuous decoding
+        binding.barcodeScanner.decodeContinuous(barcodeCallback)
+
+        binding.cbFlash.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                binding.barcodeScanner.setTorchOn()
+            } else {
+                binding.barcodeScanner.setTorchOff()
+            }
+        }
+
         binding.btnToggleScan.setOnClickListener {
             isScanning = !isScanning
             if (isScanning) {
                 binding.btnToggleScan.text = "Pause Scan"
+                binding.barcodeScanner.resume()
                 binding.tvResult.text = "Point camera at barcode"
-                startCamera()
             } else {
                 binding.btnToggleScan.text = "Resume Scan"
+                binding.barcodeScanner.pause()
                 binding.tvResult.text = "Scanning paused"
-                cameraProvider?.unbindAll()
-            }
-        }
-
-        binding.switchFlash.setOnCheckedChangeListener { _, isChecked ->
-            camera?.cameraControl?.enableTorch(isChecked)
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == CAMERA_PERMISSION_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                startCamera()
-            } else {
-                Toast.makeText(context, "Camera permission is required for scanning.", Toast.LENGTH_LONG).show()
             }
         }
     }
 
-    private fun startCamera() {
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
-        cameraProviderFuture.addListener({
-            cameraProvider = cameraProviderFuture.get()
+    private fun handleBarcodeScan(barcode: String) {
+        binding.tvResult.text = "Scanned: $barcode\nFetching ingredients..."
 
-            // Preview use case
-            val preview = Preview.Builder()
-                .setTargetRotation(binding.previewView.display.rotation)
-                .build()
-                .also {
-                    it.setSurfaceProvider(binding.previewView.surfaceProvider)
+        // Fetch ingredients async, then evaluate and save
+        BarcodeIngredientLookup().lookupOpenFoodFacts(barcode) { ingredients ->
+            activity?.runOnUiThread {
+                if (_binding == null) return@runOnUiThread // Fragment destroyed
+
+                val activeAllergens = vm.getActiveAllergens().toSet()
+                val checker = AllergenChecker().apply {
+                    activeAllergens.forEach { addAllergen(it) }
                 }
 
-            // Image analysis use case
-            val imageAnalysis = ImageAnalysis.Builder()
-                .setTargetRotation(binding.previewView.display.rotation)
-                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-                .build()
-                .also {
-                    it.setAnalyzer(cameraExecutor) { imageProxy ->
-                        processImage(imageProxy)
-                    }
+                val parsed = BarcodeIngredientLookup().parseIngredients(ingredients)
+                val verdict = when (checker.foodSafe(parsed)) {
+                    2 -> "⚠️ Contains your allergens!"
+                    1 -> "⚠️ Unknown, proceed with caution"
+                    else -> "✓ No allergens found"
                 }
 
-            // Camera selector
-            val cameraSelector = CameraSelector.Builder()
-                .requireLensFacing(CameraSelector.LENS_FACING_BACK)
-                .build()
-
-            try {
-                cameraProvider?.unbindAll()
-                camera = cameraProvider?.bindToLifecycle(
-                    this,
-                    cameraSelector,
-                    preview,
-                    imageAnalysis
+                // Save the scan
+                vm.saveScan(
+                    Product(
+                        barcode = barcode,
+                        name = "Unknown",
+                        ingredients = if (ingredients.isBlank()) null else ingredients
+                    )
                 )
 
-                // Set initial torch state
-                camera?.cameraControl?.enableTorch(binding.switchFlash.isChecked)
-
-            } catch (e: Exception) {
-                android.util.Log.e("QrScanFragment", "Camera binding failed", e)
+                binding.tvResult.text = "Scanned: $barcode\n$verdict"
             }
-        }, ContextCompat.getMainExecutor(requireContext()))
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.barcodeScanner.resume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.barcodeScanner.pause()
     }
 
     private fun processImage(imageProxy: ImageProxy) {
@@ -224,7 +213,7 @@ class QrScanFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        cameraExecutor.shutdown()
+        binding.barcodeScanner.pause()
         _binding = null
     }
 }
