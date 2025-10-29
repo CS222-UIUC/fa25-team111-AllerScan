@@ -37,6 +37,12 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    sourceSets {
+        getByName("main") {
+            java.srcDirs("src/main/java")
+            kotlin.srcDirs("src/main/java")
+        }
+    }
 }
 
 dependencies {
@@ -63,5 +69,6 @@ dependencies {
     kapt("androidx.room:room-compiler:2.6.1")
     implementation("com.squareup.okhttp3:okhttp:4.11.0") //OkHTTP client library
     implementation("org.json:json:20230227")
+    implementation("com.google.mlkit:barcode-scanning:17.2.0")
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
 }
-

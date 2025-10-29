@@ -1,4 +1,4 @@
-// File: 'app/src/main/java/com/example/allerscan/data/AppRepository.kt'
+// File: 'app/src/main/java/com/example/allerscan/data/AppRepository.kt
 package com.example.allerscan.data
 
 import android.content.Context
