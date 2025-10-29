@@ -1,4 +1,4 @@
-// Put this at: app/src/main/java/com/example/allerscan/database/ProductDao.kt
+// File: 'app/src/main/java/com/example/allerscan/database/ProductDao.kt'
 package com.example.allerscan.database
 
 import androidx.room.Dao
@@ -8,7 +8,7 @@ import androidx.room.Query
 
 @Dao
 interface ProductDao {
-    @Query("SELECT * FROM products")
+    @Query("SELECT * FROM products ORDER BY dateScanned DESC")
     fun getAllProducts(): List<Product>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
