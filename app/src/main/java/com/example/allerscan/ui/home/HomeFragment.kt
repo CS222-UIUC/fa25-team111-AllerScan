@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.allerscan.databinding.FragmentHomeBinding
+import com.example.allerscan.R
 
 class HomeFragment : Fragment() {
 
@@ -33,6 +35,26 @@ class HomeFragment : Fragment() {
             textView.text = it
         }
         return root
+    }
+
+    //use recycler view with list adapter to scroll through barcode history
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        //reference: https://www.geeksforgeeks.org/kotlin/searchview-in-android-with-kotlin/
+        var searchBarcodeHistory = view.findViewById<SearchView>(R.id.searchBarcodeHistory)
+        searchBarcodeHistory.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                val barcodeList = mutableListOf<String>()
+                if (barcodeList.contains(query)) {
+                    //if barcode exists then show it
+                } else {
+                    //if barcode does not exist, print text does not exist/redirect to camera
+                }
+                return false;
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false;
+            }
+        })
     }
 
     override fun onDestroyView() {

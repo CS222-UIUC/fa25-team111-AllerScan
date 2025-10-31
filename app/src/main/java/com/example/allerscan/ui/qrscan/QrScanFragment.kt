@@ -10,9 +10,11 @@ import android.widget.Toast
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.allerscan.databinding.FragmentQrScanBinding
+import android.widget.SearchView
 
 class QrScanFragment : Fragment() {
     private var _binding: FragmentQrScanBinding? = null
@@ -27,6 +29,7 @@ class QrScanFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentQrScanBinding.inflate(inflater, container, false)
+        binding.previewView.implementationMode = PreviewView.ImplementationMode.COMPATIBLE;
         return binding.root
     }
 
