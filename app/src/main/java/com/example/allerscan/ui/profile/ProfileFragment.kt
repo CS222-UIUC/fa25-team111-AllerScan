@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -14,7 +15,7 @@ class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
-
+    private lateinit var allergenViewMap: Map<CheckBox, String>
     private lateinit var profileViewModel: ProfileViewModel
 
     override fun onCreateView(
@@ -26,6 +27,22 @@ class ProfileFragment : Fragment() {
 
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        allergenViewMap = mapOf(
+            binding.allergenBox1 to "milk",
+            binding.allergenBox2 to "egg",
+            binding.allergenBox3 to "wheat",
+            binding.allergenBox4 to "soy",
+            binding.allergenBox5 to "shellfish",
+            binding.allergenBox6 to "fish",
+            binding.allergenBox7 to "peanut",
+            binding.allergenBox8 to "almond",
+            binding.allergenBox9 to "walnut",
+            binding.allergenBox10 to "pecan",
+            binding.allergenBox11 to "pistachio",
+            binding.allergenBox12 to "hazelnut",
+            binding.allergenBox15 to "sesame"
+        )
 
         setupClickListeners()
         setupObservers()
@@ -41,6 +58,9 @@ class ProfileFragment : Fragment() {
 
             if (firstName.isNotBlank() && lastName.isNotBlank()) {
                 profileViewModel.saveName(firstName, lastName)
+
+                val allergenStates = getChecklistAllergenStates()
+                profileViewModel.updateAllergensFromUI(allergenStates)
             } else {
                 Toast.makeText(requireContext(), "Please fill out all fields", Toast.LENGTH_SHORT).show()
             }
@@ -52,10 +72,36 @@ class ProfileFragment : Fragment() {
 
         binding.buttonDeleteProfile.setOnClickListener {
             profileViewModel.deleteData()
+            uncheckAllAllergenBoxes()
+            profileViewModel.updateAllergensFromUI(getChecklistAllergenStates(true))
             Toast.makeText(requireContext(), "Profile data has been deleted", Toast.LENGTH_SHORT).show()
         }
     }
+    private fun getChecklistAllergenStates(forceInactive: Boolean = false): Map<String, Boolean> {
+        val states = mutableMapOf<String, Boolean>()
 
+
+        allergenViewMap.forEach { (checkBox, allergenName) ->
+            states[allergenName] = checkBox.isChecked
+        }
+
+        return states
+    }
+
+    private fun updateCheckboxes(activateAllergens: List<String>){
+        val activeSet = activateAllergens.toSet()
+        allergenViewMap.forEach { (checkBox, allergenName) ->
+            checkBox.isChecked = activeSet.contains(allergenName)
+        }
+
+
+    }
+    private fun uncheckAllAllergenBoxes() {
+
+        allergenViewMap.forEach {(checkBox, allergenName) ->
+            checkBox.isChecked = false
+        }
+    }
     private fun setupObservers() {
         profileViewModel.fullName.observe(viewLifecycleOwner) { fullName ->
             if (!fullName.isNullOrEmpty()) {
@@ -78,6 +124,9 @@ class ProfileFragment : Fragment() {
             binding.groupEditMode.isVisible = isEditing
             binding.groupDisplayMode.isVisible = !isEditing
         }
+        profileViewModel.activeAllergens.observe(viewLifecycleOwner) { activeAllergens ->
+            updateCheckboxes(activeAllergens)}
+
     }
 
     override fun onDestroyView() {
