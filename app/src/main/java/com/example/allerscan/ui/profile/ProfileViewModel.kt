@@ -48,7 +48,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
 
     fun deleteData() {
         sharedPreferences.edit().clear().apply()
-
+        _fullName.value = null
         editName()
     }
 
