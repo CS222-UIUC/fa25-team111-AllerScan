@@ -1,4 +1,4 @@
-// Put this at: app/src/main/java/com/example/allerscan/database/ProductDatabase.kt
+// File: 'app/src/main/java/com/example/allerscan/database/ProductDatabase.kt'
 package com.example.allerscan.database
 
 import android.content.Context
@@ -6,23 +6,25 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Product::class], version = 1)
+@Database(entities = [Product::class, Allergen::class], version = 2)
 abstract class ProductDatabase : RoomDatabase() {
     abstract fun productDao(): ProductDao
+    abstract fun allergenDao(): AllergenDao
 
-    // This is a simple singleton pattern
     companion object {
-        private var instance: ProductDatabase? = null
+        @Volatile private var instance: ProductDatabase? = null
 
         fun getDatabase(context: Context): ProductDatabase {
-            if (instance == null) {
-                instance = Room.databaseBuilder(
+            return instance ?: synchronized(this) {
+                Room.databaseBuilder(
                     context.applicationContext,
                     ProductDatabase::class.java,
                     "product_database"
-                ).build()
+                )
+                .fallbackToDestructiveMigration()
+                .allowMainThreadQueries() // simple for now; move to coroutines later
+                .build().also { instance = it }
             }
-            return instance!!
         }
     }
 }
