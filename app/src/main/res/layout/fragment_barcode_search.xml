@@ -25,12 +25,12 @@
         android:layout_marginTop="10dp"
         android:hint="Enter Barcode..."
         android:inputType="number"
-        app:layout_constraintEnd_toStartOf="@+id/button_save_profile"
+        app:layout_constraintEnd_toStartOf="@+id/button_barcode"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/barcode_enter_instructions" />
 
     <Button
-        android:id="@+id/button_save_profile"
+        android:id="@+id/button_barcode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
