@@ -61,6 +61,7 @@ class ProfileFragment : Fragment() {
 
                 val allergenStates = getChecklistAllergenStates()
                 profileViewModel.updateAllergensFromUI(allergenStates)
+                Toast.makeText(requireContext(), "Profile Saved!", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(requireContext(), "Please fill out all fields", Toast.LENGTH_SHORT).show()
             }
@@ -73,11 +74,10 @@ class ProfileFragment : Fragment() {
         binding.buttonDeleteProfile.setOnClickListener {
             profileViewModel.deleteData()
             uncheckAllAllergenBoxes()
-            profileViewModel.updateAllergensFromUI(getChecklistAllergenStates(true))
             Toast.makeText(requireContext(), "Profile data has been deleted", Toast.LENGTH_SHORT).show()
         }
     }
-    private fun getChecklistAllergenStates(forceInactive: Boolean = false): Map<String, Boolean> {
+    private fun getChecklistAllergenStates(): Map<String, Boolean> {
         val states = mutableMapOf<String, Boolean>()
 
 
@@ -98,7 +98,7 @@ class ProfileFragment : Fragment() {
     }
     private fun uncheckAllAllergenBoxes() {
 
-        allergenViewMap.forEach {(checkBox, allergenName) ->
+        allergenViewMap.forEach {(checkBox)->
             checkBox.isChecked = false
         }
     }

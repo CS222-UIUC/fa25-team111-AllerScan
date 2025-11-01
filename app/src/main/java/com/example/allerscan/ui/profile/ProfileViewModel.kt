@@ -67,10 +67,6 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    private fun getCheckListAllergenStates(forceInactive: Boolean): Map<String, Boolean> {
-        val checklistAllergens = listOf("milk", "egg", "wheat", "soy","shellfish", "fish", "peanut", "almond", "walnut", "pecan", "pistachio", "hazelnut", "sesame")
-        return checklistAllergens.associateWith {!forceInactive}
-    }
 
     fun editName() {
         _isEditing.value = true
