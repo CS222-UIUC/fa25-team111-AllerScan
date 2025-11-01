@@ -76,7 +76,14 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
         sharedPreferences.edit().clear().apply()
         _fullName.value = null
         editName()
-        updateAllergensFromUI(mapOf())
+        val checklistAllergens = listOf(
+            "milk", "egg", "wheat", "soy", "shellfish", "fish", "peanut",
+            "almond", "walnut", "pecan", "pistachio", "hazelnut", "sesame"
+        )
+
+        val inactiveStates = checklistAllergens.associateWith { false }
+
+        updateAllergensFromUI(inactiveStates)
     }
 
 }
