@@ -29,7 +29,7 @@ class QrScanFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentQrScanBinding.inflate(inflater, container, false)
-        binding.previewView.implementationMode = PreviewView.ImplementationMode.COMPATIBLE;
+
         return binding.root
     }
 

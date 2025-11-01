@@ -1,4 +1,5 @@
 package com.example.allerscan.ui.qrscan
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -33,13 +34,6 @@ class barcodeSearchFragment : Fragment() {
 //            }
         }
     }
-
-    //    val searchView = findViewById(R.id.barcodeSearch)
-//    searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
-//        fun onQueryTextSubmit(query: String): String {
-//
-//        }
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

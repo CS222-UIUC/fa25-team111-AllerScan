@@ -9,7 +9,7 @@
         android:id="@+id/barcode_enter_instructions"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="0dp"
         android:text="Insert Barcode Manually Below:"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:minWidth="48dp"
         android:minHeight="48dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:hint="Enter Barcode..."
         android:inputType="number"
         app:layout_constraintEnd_toStartOf="@+id/button_save_profile"
@@ -33,20 +33,9 @@
         android:id="@+id/button_save_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="4dp"
         android:text="Search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barcode_enter_instructions" />
-    <!--    <SearchView-->
-<!--        android:id="@+id/barcodeSearch"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="20dp"-->
-<!--        android:queryHint="Insert Barcode Manually"-->
-<!--        android:textSize="30sp"-->
-<!--        android:iconifiedByDefault="false"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"/>-->
 </androidx.constraintlayout.widget.ConstraintLayout>
