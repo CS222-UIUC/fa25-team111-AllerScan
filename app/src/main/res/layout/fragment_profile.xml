@@ -11,7 +11,7 @@
         android:id="@+id/group_edit_mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="label_first_name,input_first_name,label_last_name,input_last_name,button_save_profile, button_delete_profile, allergen_box_1, allergen_box_2, allergen_box_3, allergen_box_4, allergen_box_5, allergen_box_6, allergen_box_7, allergen_box_8, allergen_box_9, allergen_box_10"
+        app:constraint_referenced_ids="label_first_name,input_first_name,label_last_name,input_last_name,button_save_profile, button_delete_profile, allergen_box_1, allergen_box_2, allergen_box_3, allergen_box_4, allergen_box_5, allergen_box_6, allergen_box_7, allergen_box_8, allergen_box_9"
         android:visibility="visible"
         />
 
