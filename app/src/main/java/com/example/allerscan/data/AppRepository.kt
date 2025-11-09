@@ -12,7 +12,7 @@ class AppRepository(context: Context) {
     fun ensureDefaultAllergens() {
         if (allergenDao.getAll().isEmpty()) {
             listOf(
-                "peanut","almond","walnut","pecan","nut",
+                "peanut","almond","walnut","pecan","pistachio","hazelnut","cashews", "pine nuts",
                 "milk","egg","soy","fish","shellfish","sesame","wheat"
             ).forEach { allergenDao.upsert(Allergen(name = it, active = false)) }
         }
