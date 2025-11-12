@@ -10,25 +10,23 @@
         android:id="@+id/barcode_enter_instructions"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:text="Insert Barcode Manually Below:"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/input_barcode"/>
 
     <EditText
         android:id="@+id/input_barcode"
-        android:layout_width="260dp"
-        android:layout_height="52dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="10dp"
         android:hint="Enter Barcode..."
         android:inputType="number"
-        app:layout_constraintEnd_toStartOf="@+id/button_barcode"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_barcode"
         app:layout_constraintTop_toBottomOf="@+id/barcode_enter_instructions" />
 
     <Button
@@ -36,9 +34,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="10dp"
         android:text="Search"
+        app:layout_constraintStart_toEndOf="@+id/input_barcode"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintTop_toBottomOf="@id/barcode_enter_instructions" />
 </androidx.constraintlayout.widget.ConstraintLayout>
