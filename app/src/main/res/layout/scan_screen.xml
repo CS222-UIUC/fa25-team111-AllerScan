@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scan_screen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Percentage Margins -->
+    <!-- Useful: https://www.geeksforgeeks.org/android/guidelines-in-android-constraintlayout/ -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/left_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/right_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <!-- Connect Fragments -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/left_margin"
+        app:layout_constraintEnd_toEndOf="@id/right_margin">
+
+        <!-- Barcode Search -->
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/barcode_search_container"
+            android:name="com.example.allerscan.ui.qrscan.barcodeSearchFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.13"
+            app:layout_constraintBottom_toTopOf="@+id/camera_container" />
+
+        <!-- Barcode Camera Scan -->
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/camera_container"
+            android:name="com.example.allerscan.ui.qrscan.QrScanFragment"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.87"
+            app:layout_constraintTop_toBottomOf="@+id/barcode_search_container" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
