@@ -1,0 +1,38 @@
+package com.example.allerscan.ui.home
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.example.allerscan.R
+
+//Used as Reference for RecyclerView Implementation: https://www.geeksforgeeks.org/kotlin/how-to-add-dividers-in-android-recyclerview/
+
+class ProductRecyclerView(private val products: List<ProductData>) : RecyclerView.Adapter<ProductRecyclerView.ProductDataHolder>() {
+    class ProductDataHolder(productView: View) : RecyclerView.ViewHolder(productView)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductDataHolder {
+        val view: View =
+            LayoutInflater.from(parent.context).inflate(R.layout.history_list_product_view, parent, false)
+        return ProductDataHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ProductDataHolder, position: Int) {
+        val currentProduct: ProductData = products[position]
+        val product_name_text: TextView = holder.itemView.findViewById(R.id.product_name_text)
+        product_name_text.text = currentProduct.product
+        val barcode_text: TextView = holder.itemView.findViewById(R.id.barcode_text)
+        barcode_text.text = currentProduct.barcode
+        val safety_text: TextView = holder.itemView.findViewById(R.id.safety_text)
+        safety_text.text = currentProduct.safety
+    }
+
+    override fun getItemCount(): Int {
+        return products.size
+    }
+
+    override fun onViewRecycled(holder: ProductDataHolder) {
+        super.onViewRecycled(holder)
+    }
+}
