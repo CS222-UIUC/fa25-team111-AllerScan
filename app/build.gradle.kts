@@ -71,4 +71,5 @@ dependencies {
     implementation("org.json:json:20230227")
     implementation("com.google.mlkit:barcode-scanning:17.2.0")
     implementation("androidx.fragment:fragment-ktx:1.6.2")
+    implementation("androidx.recyclerview:recyclerview:1.2.1")
 }
