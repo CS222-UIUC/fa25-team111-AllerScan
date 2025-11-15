@@ -13,4 +13,13 @@
     <color name="zxing_custom_result_view">#b0000000</color>
     <color name="zxing_custom_viewfinder_mask">#60000000</color>
     <color name="zxing_custom_viewfinder_border">#00FF00</color>
+
+    <!-- Welcome screen colors -->
+    <color name="primary_color">#FF6200EE</color>
+    <color name="primary_dark">#FF3700B3</color>
+    <color name="accent_color">#FF03DAC5</color>
+    <color name="text_primary">#FF212121</color>
+    <color name="text_secondary">#FF757575</color>
+    <color name="dot_active">#FF6200EE</color>
+    <color name="dot_inactive">#FFCCCCCC</color>
 </resources>
