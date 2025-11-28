@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
-        app:constraint_referenced_ids="label_first_name,input_first_name,label_last_name,input_last_name,button_save_profile, button_delete_profile, allergen_box_1, allergen_box_2, allergen_box_3, allergen_box_4, allergen_box_5, allergen_box_6, allergen_box_7, allergen_box_8, allergen_box_9, allergen_box_10, allergen_box_11, allergen_box_12, allergen_box_15" />
+        app:constraint_referenced_ids="label_first_name,input_first_name,label_last_name,input_last_name,button_save_profile, button_delete_profile, allergen_box_1, allergen_box_2, allergen_box_3, allergen_box_4, allergen_box_5, allergen_box_6, allergen_box_7, allergen_box_8, allergen_box_9, allergen_box_10, allergen_box_11, allergen_box_12, allergen_box_15, button_add_custom_allergen" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_display_mode"
@@ -26,7 +26,7 @@
         android:id="@+id/label_first_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         android:text="First Name"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,15 +35,28 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:id="@+id/input_last_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:hint="Enter your last name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/label_last_name"
+        app:layout_constraintTop_toBottomOf="@id/label_last_name" />
+
+    <EditText
         android:id="@+id/input_first_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:hint="Enter your first name"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@id/label_first_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/label_first_name" />
 
     <TextView
         android:id="@+id/label_last_name"
@@ -57,18 +70,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/input_first_name" />
 
-    <EditText
-        android:id="@+id/input_last_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="Enter your last name"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/label_last_name"
-        app:layout_constraintTop_toBottomOf="@id/label_last_name" />
-
-    <!-- ALLERGEN SELECTION GRID -->
 
     <CheckBox
         android:id="@+id/allergen_box_1"
@@ -114,7 +115,6 @@
         app:layout_constraintTop_toBottomOf="@id/allergen_box_1"
         android:text="🌾 Wheat"/>
 
-    <!-- Repeat for boxes 5 through 10 -->
 
     <CheckBox
         android:id="@+id/allergen_box_5"
@@ -201,6 +201,17 @@
         app:layout_constraintStart_toStartOf="@id/allergen_box_7"
         app:layout_constraintTop_toBottomOf="@id/allergen_box_7" />
 
+    <Button
+        android:id="@+id/button_add_custom_allergen"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Add Custom Allergen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/allergen_box_15" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_save_profile"
         android:layout_width="63dp"
@@ -245,9 +256,10 @@
         android:id="@+id/button_delete_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="52dp"
         android:backgroundTint="#FF0000"
         android:contentDescription="Delete Profile"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/button_add_custom_allergen"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/outline_delete_24"
         app:tint="@android:color/white" />

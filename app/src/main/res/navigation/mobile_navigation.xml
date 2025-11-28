@@ -21,5 +21,15 @@
         android:id="@+id/navigation_profile"
         android:name="com.example.allerscan.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profile_to_custom_allergen"
+            app:destination="@id/navigation_custom_allergen" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_custom_allergen"
+        android:name="com.example.allerscan.ui.profile.CustomAllergenFragment"        android:label="Custom Allergens"
+        tools:layout="@layout/fragment_custom_allergen" />
+
 </navigation>

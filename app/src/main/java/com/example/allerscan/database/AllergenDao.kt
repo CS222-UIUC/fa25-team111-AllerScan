@@ -22,4 +22,13 @@ interface AllergenDao {
 
     @Query("DELETE FROM allergens")
     fun clear()
+
+    @Query("""
+        DELETE FROM allergens
+        WHERE name NOT IN (
+            'milk', 'egg', 'wheat', 'soy', 'shellfish', 'fish', 'peanut', 
+            'almond', 'walnut', 'pecan', 'pistachio', 'hazelnut', 'sesame'
+        )
+    """)
+    suspend fun deleteAllCustomAllergens()
 }

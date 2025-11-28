@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.allerscan.databinding.FragmentProfileBinding
+import androidx.navigation.fragment.findNavController
 
 class ProfileFragment : Fragment() {
 
@@ -63,7 +64,8 @@ class ProfileFragment : Fragment() {
                 profileViewModel.updateAllergensFromUI(allergenStates)
                 Toast.makeText(requireContext(), "Profile Saved!", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(requireContext(), "Please fill out all fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Please fill out all fields", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 
@@ -74,8 +76,13 @@ class ProfileFragment : Fragment() {
         binding.buttonDeleteProfile.setOnClickListener {
             profileViewModel.deleteData()
             uncheckAllAllergenBoxes()
-            Toast.makeText(requireContext(), "Profile data has been deleted", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Profile data has been deleted", Toast.LENGTH_SHORT)
+                .show()
         }
+        binding.buttonAddCustomAllergen.setOnClickListener {
+            findNavController().navigate(com.example.allerscan.R.id.action_profile_to_custom_allergen)
+        }
+
     }
     private fun getChecklistAllergenStates(): Map<String, Boolean> {
         val states = mutableMapOf<String, Boolean>()
