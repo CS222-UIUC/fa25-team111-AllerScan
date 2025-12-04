@@ -80,6 +80,15 @@ class ProfileFragment : Fragment() {
                 .show()
         }
         binding.buttonAddCustomAllergen.setOnClickListener {
+            val firstName = binding.inputFirstName.text.toString().trim()
+            val lastName = binding.inputLastName.text.toString().trim()
+            val allergenStates = getChecklistAllergenStates()
+
+            if (firstName.isNotBlank() && lastName.isNotBlank()) {
+                profileViewModel.saveProgress(firstName, lastName)
+                profileViewModel.updateAllergensFromUI(allergenStates)
+            }
+
             findNavController().navigate(com.example.allerscan.R.id.action_profile_to_custom_allergen)
         }
     }

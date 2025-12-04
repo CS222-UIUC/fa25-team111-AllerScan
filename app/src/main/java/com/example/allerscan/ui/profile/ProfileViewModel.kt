@@ -53,7 +53,10 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-
+    fun saveProgress(firstName: String, lastName: String) {
+        sharedPreferences.edit().putString("full_name", "$firstName $lastName").apply()
+        _fullName.value = "$firstName $lastName"
+    }
     fun saveName(firstName: String, lastName: String) {
         if (firstName.isBlank() || lastName.isBlank()) {
             return
