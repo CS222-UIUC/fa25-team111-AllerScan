@@ -39,15 +39,29 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
         loadActiveAllergens()
     }
 
+    fun addAllergen(allergenName: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repo.setAllergenActive(allergenName, true)
+            loadActiveAllergens()
+        }
+    }
+
+    fun removeAllergen(allergenName: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repo.setAllergenActive(allergenName, false)
+            loadActiveAllergens()
+        }
+    }
+
 
     fun saveName(firstName: String, lastName: String) {
         if (firstName.isBlank() || lastName.isBlank()) {
-            return // Don't save if fields are empty
+            return
         }
 
         val nameToSave = "$firstName $lastName"
         _fullName.value = nameToSave
-        _isEditing.value = false // Switch to display mode
+        _isEditing.value = false
 
         sharedPreferences.edit().putString(KEY_FULL_NAME, nameToSave).apply()
     }
@@ -56,14 +70,15 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
             allergenStates.forEach { (allergenName, isActive) ->
                 repo.setAllergenActive(allergenName, isActive)
             }
+            loadActiveAllergens()
         }
 
     }
 
     fun loadActiveAllergens(){
         viewModelScope.launch(Dispatchers.IO){
-            val activeAllergens = repo.getActiveAllergens()
-            _activeAllergens.postValue(activeAllergens)
+            val activeAllergensList = repo.getActiveAllergens()
+            _activeAllergens.postValue(activeAllergensList)
         }
     }
 
@@ -75,15 +90,17 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     fun deleteData() {
         sharedPreferences.edit().clear().apply()
         _fullName.value = null
+        _activeAllergens.value = emptyList()
         editName()
-        val checklistAllergens = listOf(
-            "milk", "egg", "wheat", "soy", "shellfish", "fish", "peanut",
-            "almond", "walnut", "pecan", "pistachio", "hazelnut", "sesame"
-        )
 
-        val inactiveStates = checklistAllergens.associateWith { false }
-
-        updateAllergensFromUI(inactiveStates)
+        viewModelScope.launch(Dispatchers.IO) {
+            repo.deleteAllCustomAllergens()
+            val checklistAllergens = listOf(
+                "milk", "egg", "wheat", "soy", "shellfish", "fish", "peanut",
+                "almond", "walnut", "pecan", "pistachio", "hazelnut", "sesame"
+            )
+            val inactiveStates = checklistAllergens.associateWith { false }
+            updateAllergensFromUI(inactiveStates)
+        }
     }
-
 }

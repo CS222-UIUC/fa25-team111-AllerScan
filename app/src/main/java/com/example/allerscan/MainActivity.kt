@@ -97,4 +97,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    // This function handles the "Up" button press on the action bar (the back arrow)
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }
 }
