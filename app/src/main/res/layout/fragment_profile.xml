@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="text_welcome_message,button_edit_profile, allergen_text" />
+        app:constraint_referenced_ids="text_welcome_message,button_edit_profile, allergen_text, text_allergen_list" />
 
 
     <TextView
@@ -269,11 +269,25 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:gravity="center"
         android:text="Your Allergens:"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/text_welcome_message"
-        tools:layout_editor_absoluteX="119dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <TextView
+        android:id="@+id/text_allergen_list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="18sp"
+        android:lineSpacingMultiplier="1.2"
+        app:layout_constraintTop_toBottomOf="@id/allergen_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="• Milk\n• Egg\n• Peanut" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
