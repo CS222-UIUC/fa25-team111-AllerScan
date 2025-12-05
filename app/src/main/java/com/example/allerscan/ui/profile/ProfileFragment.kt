@@ -1,5 +1,6 @@
 package com.example.allerscan.ui.profile
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +10,8 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.allerscan.databinding.FragmentProfileBinding
 import androidx.navigation.fragment.findNavController
+import com.example.allerscan.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
 
@@ -51,11 +52,10 @@ class ProfileFragment : Fragment() {
         return root
     }
 
-
     private fun setupClickListeners() {
         binding.buttonSaveProfile.setOnClickListener {
-            val firstName = binding.inputFirstName.text.toString()
-            val lastName = binding.inputLastName.text.toString()
+            val firstName = binding.inputFirstName.text.toString().trim()
+            val lastName = binding.inputLastName.text.toString().trim()
 
             if (firstName.isNotBlank() && lastName.isNotBlank()) {
                 profileViewModel.saveName(firstName, lastName)
@@ -80,35 +80,41 @@ class ProfileFragment : Fragment() {
                 .show()
         }
         binding.buttonAddCustomAllergen.setOnClickListener {
+            val firstName = binding.inputFirstName.text.toString().trim()
+            val lastName = binding.inputLastName.text.toString().trim()
+            val allergenStates = getChecklistAllergenStates()
+
+            if (firstName.isNotBlank() && lastName.isNotBlank()) {
+                profileViewModel.saveProgress(firstName, lastName)
+                profileViewModel.updateAllergensFromUI(allergenStates)
+            }
+
             findNavController().navigate(com.example.allerscan.R.id.action_profile_to_custom_allergen)
         }
-
     }
+
     private fun getChecklistAllergenStates(): Map<String, Boolean> {
         val states = mutableMapOf<String, Boolean>()
-
-
         allergenViewMap.forEach { (checkBox, allergenName) ->
             states[allergenName] = checkBox.isChecked
         }
-
         return states
     }
 
-    private fun updateCheckboxes(activateAllergens: List<String>){
-        val activeSet = activateAllergens.toSet()
+    private fun updateCheckboxes(activeAllergens: List<String>) {
+        val activeSet = activeAllergens.toSet()
         allergenViewMap.forEach { (checkBox, allergenName) ->
             checkBox.isChecked = activeSet.contains(allergenName)
         }
-
-
     }
-    private fun uncheckAllAllergenBoxes() {
 
-        allergenViewMap.forEach {(checkBox)->
+    private fun uncheckAllAllergenBoxes() {
+        allergenViewMap.keys.forEach { checkBox ->
             checkBox.isChecked = false
         }
     }
+
+    @SuppressLint("SetTextI18n")
     private fun setupObservers() {
         profileViewModel.fullName.observe(viewLifecycleOwner) { fullName ->
             if (!fullName.isNullOrEmpty()) {
@@ -131,9 +137,19 @@ class ProfileFragment : Fragment() {
             binding.groupEditMode.isVisible = isEditing
             binding.groupDisplayMode.isVisible = !isEditing
         }
-        profileViewModel.activeAllergens.observe(viewLifecycleOwner) { activeAllergens ->
-            updateCheckboxes(activeAllergens)}
 
+        profileViewModel.activeAllergens.observe(viewLifecycleOwner) { activeAllergens ->
+            updateCheckboxes(activeAllergens)
+
+            if (activeAllergens.isNullOrEmpty()) {
+                binding.textAllergenList.text = "None selected."
+            } else {
+                val formattedList = activeAllergens.joinToString(separator = "\n") { allergen ->
+                    "• ${allergen.replaceFirstChar { it.uppercase() }}"
+                }
+                binding.textAllergenList.text = formattedList
+            }
+        }
     }
 
     override fun onDestroyView() {
