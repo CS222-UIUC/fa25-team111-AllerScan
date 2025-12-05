@@ -23,9 +23,16 @@ class AllergenChecker {
     )
     //or use a list
     //val allergenList = mutableListOf<String>()
-    fun addAllergen(allergen : String) {
+    fun addAllergen(allergenInput : String) {
         //allergenList.add(allergen);
-        allergenMap[allergen] = true
+        if (allergenInput.contains(" ")) {
+            val allergens = allergenInput.split(" ").filter {it.isNotEmpty()}
+            for (allergen in allergens) {
+                allergenMap[allergen] = true
+            }
+        } else {
+            allergenMap[allergenInput] = true
+        }
     }
     //should return 0 = false/does not contain, 1 = unknown, 2 = true/contains
     fun foodSafe(ingredients: MutableList<String>): Int {

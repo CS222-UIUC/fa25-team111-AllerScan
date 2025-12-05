@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         //ingredient fetch test with oreo barcode "044000047009"
         val test = BarcodeIngredientLookup()
         val testAllergen = AllergenChecker()
-        test.lookupOpenFoodFacts("044000047009") { ingredients ->
+        test.lookupOpenFoodFacts("044000047009") { productName, ingredients ->
             if (ingredients.isEmpty()) {
                 Log.e("MainActivity", "Test Oreo Ingredients not found/request failed")
             } else {
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         //ingredient fetch test with peanut butter barcode "051500241776"
-        test.lookupOpenFoodFacts("051500241776") { ingredients ->
+        test.lookupOpenFoodFacts("051500241776") { productName, ingredients ->
             if (ingredients.isEmpty()) {
                 Log.e("MainActivity", "Test Peanut Butter Ingredients not found/request failed")
             } else {
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         //ingredient fetch test with water barcode "3057640257773"
-        test.lookupOpenFoodFacts("3057640257773") { ingredients ->
+        test.lookupOpenFoodFacts("3057640257773") { productName, ingredients ->
             if (ingredients.isEmpty()) {
                 Log.e("MainActivity", "Test Water Ingredients not found/request failed")
             } else {
@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         //ingredient fetch test with nonfood and nonproper barcode "047872973"
-        test.lookupOpenFoodFacts("047872973") { ingredients ->
+        test.lookupOpenFoodFacts("047872973") { productName, ingredients ->
             if (ingredients.isEmpty()) {
                 Log.e("MainActivity", "Test Not Food Ingredients not found/request failed")
             } else {
