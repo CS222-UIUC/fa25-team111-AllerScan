@@ -48,26 +48,27 @@ class barcodeSearchFragment : Fragment() {
                         val safe = allergenCheck.foodSafe(ingredientList)
                         //Toast.makeText(requireContext(), "Barcode Found", Toast.LENGTH_SHORT).show()
 
-//                        val activeAllergens = vm.getActiveAllergens().toSet()
-//                        val checker = AllergenChecker().apply {
-//                            activeAllergens.forEach { addAllergen(it) }
-//                        }
-//
-//                        val verdict = when (checker.foodSafe(ingredientList)) {
-//                            2 -> "⚠️ Contains your allergens!"
-//                            1 -> "⚠️ Unknown, proceed with caution"
-//                            else -> "✓ No allergens found"
-//                        }
-//
-//                        // Save the scan
-//                        vm.saveScan(
-//                            Product(
-//                                barcode = barcode,
-//                                name = productName,
-//                                safety = verdict,
-//                                ingredients = if (ingredients.isBlank()) null else ingredients
-//                            )
-//                        )
+                        val activeAllergens = vm.getActiveAllergens().toSet()
+                        val checker = AllergenChecker().apply {
+                            activeAllergens.forEach { addAllergen(it) }
+                        }
+
+                        val verdict = when (checker.foodSafe(ingredientList)) {
+                            2 -> "⚠️ Contains your allergens!"
+                            1 -> "⚠️ Unknown, proceed with caution"
+                            else -> "✓ No allergens found"
+                        }
+
+                        // Save the scan
+                        vm.saveScan(
+                            Product(
+                                barcode = barcode,
+                                name = productName,
+                                //safety = verdict
+                                ingredients = if (ingredients.isBlank()) null else ingredients
+                            )
+                        )
+                        binding.inputBarcode.getText().clear()
                     }
                 }
             } else {
