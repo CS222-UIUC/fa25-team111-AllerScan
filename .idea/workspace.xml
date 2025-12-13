@@ -122,7 +122,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c8eea14d-ff38-40ca-bea4-b6afb2a585ea" name="Changes" comment="Fixed Overloaded function problem in QrScanFragment.kt">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/allerscan/ui/home/ProductViewModel.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/allerscan/database/Product.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/allerscan/database/Product.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/allerscan/database/ProductDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/allerscan/database/ProductDao.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/allerscan/ui/home/HomeFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/allerscan/ui/home/HomeFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/allerscan/ui/home/ProductRecyclerView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/allerscan/ui/home/ProductRecyclerView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/allerscan/ui/qrscan/QrScanFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/allerscan/ui/qrscan/QrScanFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/allerscan/ui/qrscan/barcodeSearchFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/allerscan/ui/qrscan/barcodeSearchFragment.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -209,7 +215,7 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "com.google.services.firebase.aqiPopupShown": "true",
-    "git-widget-placeholder": "anna-allergen-check-updates",
+    "git-widget-placeholder": "anna/historypagefunctionality",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/annak/UIUC-Fall2025-CS222/fa25-fa25-team111",
     "project.structure.last.edited": "Modules",
@@ -559,12 +565,12 @@
       <map>
         <entry key="com.example.allerscan">
           <value>
-            <CheckInfo lastCheckTimestamp="1764795318048" />
+            <CheckInfo lastCheckTimestamp="1765600258991" />
           </value>
         </entry>
         <entry key="com.example.allerscan.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1764795318035" />
+            <CheckInfo lastCheckTimestamp="1765600258997" />
           </value>
         </entry>
       </map>

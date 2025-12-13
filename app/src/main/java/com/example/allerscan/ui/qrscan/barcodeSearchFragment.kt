@@ -64,7 +64,7 @@ class barcodeSearchFragment : Fragment() {
                             Product(
                                 barcode = barcode,
                                 name = productName,
-                                //safety = verdict
+                                safety = verdict,
                                 ingredients = if (ingredients.isBlank()) null else ingredients
                             )
                         )

@@ -11,16 +11,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.allerscan.databinding.FragmentHomeBinding
 import com.example.allerscan.R
 import android.widget.SearchView
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.activityViewModels
 
 class HomeFragment : Fragment() {
 
     //MutableMap for Barcode to ProductData
-    var productHistory: MutableMap<Int, ProductData> = mutableMapOf()
-    //Update the productHistoryMap
-    fun addBarcodeHistory(barcode: Int, productName: String, safety: String) {
-        productHistory[barcode] = ProductData(productName, barcode.toString(), safety)
-    }
+//    var productHistory: MutableMap<Int, ProductData> = mutableMapOf()
+//    //Update the productHistoryMap
+//    fun addBarcodeHistory(barcode: Int, productName: String, safety: String) {
+//        productHistory[barcode] = ProductData(productName, barcode.toString(), safety)
+//    }
 
 
     private var _binding: FragmentHomeBinding? = null
@@ -29,13 +31,16 @@ class HomeFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private val productViewModel: ProductViewModel by activityViewModels()
+    private lateinit var adapter: ProductRecyclerView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        val productViewModel =
+            ViewModelProvider(this).get(ProductViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -53,12 +58,16 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         //val productHistoryList = productHistory.values.toList()
         //Temporary List of 30 Products to Test Product Display UI
-        var productHistoryList = mutableListOf<ProductData>()
-        for (i in 1..30) {
-            productHistoryList.add(ProductData("Product Name", "111111111111", "Safe to Consume!"))
-        }
+//        var productHistoryList = mutableListOf<ProductData>()
+//        for (i in 1..30) {
+//            productHistoryList.add(ProductData("Product Name", "111111111111", "Safe to Consume!"))
+//        }
+        adapter = ProductRecyclerView()
         binding.productRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.productRecyclerView.adapter = ProductRecyclerView(productHistoryList)
+        binding.productRecyclerView.adapter = adapter
+        productViewModel.allProducts.observe(viewLifecycleOwner) { products ->
+            adapter.submitList(products)
+        }
     }
 
     override fun onDestroyView() {
