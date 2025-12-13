@@ -6,6 +6,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 
 @Dao
 interface ProductDao {
@@ -14,6 +15,9 @@ interface ProductDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertProduct(product: Product)
+
+    @Update
+    fun updateProduct(product: Product)
 
     @Query("SELECT * FROM products WHERE barcode = :code")
     fun findProduct(code: String): Product?

@@ -27,6 +27,8 @@ class AppRepository(context: Context) {
     fun insertProduct(product: Product) = productDao.insertProduct(product)
 
     fun getAllProducts() = productDao.getAllProducts()
+
+    fun findProduct(code: String) = productDao.findProduct(code)
     suspend fun deleteAllCustomAllergens() {
         allergenDao.deleteAllCustomAllergens()
     }

@@ -41,7 +41,7 @@ class ProductRecyclerView : RecyclerView.Adapter<ProductRecyclerView.ProductData
         super.onViewRecycled(holder)
     }
 
-    fun submitList(newProducts: List<Product>) {
+    fun addProductList(newProducts: List<Product>) {
         products = newProducts
         notifyDataSetChanged()
     }

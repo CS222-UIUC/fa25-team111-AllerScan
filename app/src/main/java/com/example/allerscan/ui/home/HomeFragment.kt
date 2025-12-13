@@ -16,57 +16,40 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.fragment.app.activityViewModels
 
 class HomeFragment : Fragment() {
-
-    //MutableMap for Barcode to ProductData
-//    var productHistory: MutableMap<Int, ProductData> = mutableMapOf()
-//    //Update the productHistoryMap
-//    fun addBarcodeHistory(barcode: Int, productName: String, safety: String) {
-//        productHistory[barcode] = ProductData(productName, barcode.toString(), safety)
-//    }
-
-
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
-
     private val productViewModel: ProductViewModel by activityViewModels()
-    private lateinit var adapter: ProductRecyclerView
+    private lateinit var customProductAdapter: ProductRecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val productViewModel =
-            ViewModelProvider(this).get(ProductViewModel::class.java)
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-//        val textView: TextView = binding.textHome
-//        homeViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
         return root
     }
-
 
     //Product History List Recycler View
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //val productHistoryList = productHistory.values.toList()
-        //Temporary List of 30 Products to Test Product Display UI
-//        var productHistoryList = mutableListOf<ProductData>()
-//        for (i in 1..30) {
-//            productHistoryList.add(ProductData("Product Name", "111111111111", "Safe to Consume!"))
-//        }
-        adapter = ProductRecyclerView()
+        //Update Recycler View with real user data
+        customProductAdapter = ProductRecyclerView()
         binding.productRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.productRecyclerView.adapter = adapter
+        binding.productRecyclerView.adapter = customProductAdapter
         productViewModel.allProducts.observe(viewLifecycleOwner) { products ->
-            adapter.submitList(products)
+            customProductAdapter.addProductList(products)
+            //If no products scanned, show add product text
+            if (products.isNullOrEmpty()) {
+                //Show text
+                binding.textHome.visibility = View.VISIBLE
+                binding.productRecyclerView.visibility = View.GONE
+            } else {
+                //Show recycler list of products
+                binding.textHome.visibility = View.GONE
+                binding.productRecyclerView.visibility = View.VISIBLE
+            }
         }
     }
 
