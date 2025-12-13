@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey
 data class Product(
     @PrimaryKey val barcode: String,
     val name: String,
+    //val safety: String,
     val ingredients: String? = null,
     val dateScanned: String = java.util.Date().toString()
 )

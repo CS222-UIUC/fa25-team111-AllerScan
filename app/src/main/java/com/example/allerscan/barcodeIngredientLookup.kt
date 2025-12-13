@@ -16,12 +16,18 @@ import okhttp3.Response
 class BarcodeIngredientLookup {
     //given a barcode, attempts to fetch ingredients and returns ingredients as list of strings
     //combines API call and parse function
-    fun lookup(barcode: String): MutableList<String> {
+    fun lookup(barcode: String): Pair<String, MutableList<String>> {
         Log.d("BarcodeIngredientLookup", "Barcode: $barcode")
         var ingredientsString = ""
+        var productName = ""
         //lookup attempt with openFoodFacts
         val call = BarcodeIngredientLookup()
-        call.lookupOpenFoodFacts(barcode) { ingredients ->
+        call.lookupOpenFoodFacts(barcode) { product, ingredients ->
+            if (productName.isEmpty()) {
+                Log.e("BarcodeIngredientLookup", "Name not found/request failed")
+            } else {
+                productName = product
+            }
             if (ingredients.isEmpty()) {
                 Log.e("BarcodeIngredientLookup", "Ingredients not found/request failed")
             } else {
@@ -30,7 +36,7 @@ class BarcodeIngredientLookup {
             }
         }
         val ingredientList = parseIngredients(ingredientsString)
-        return ingredientList;
+        return Pair(productName, ingredientList);
     }
 
     //given a string, parses/separates the ingredients
@@ -83,7 +89,7 @@ class BarcodeIngredientLookup {
 
 
     //attempt to fetch ingredients using OpenFoodFacts API
-    fun lookupOpenFoodFacts(barcode: String, callback: (String) -> Unit) {
+    fun lookupOpenFoodFacts(barcode: String, callback: (String, String) -> Unit) {
         //https://openfoodfacts.github.io/openfoodfacts-server/api/
         //using a JavaScript example from the Open Food Facts Documentation
         //Some of the code in this function was referenced from an example generated from ChatGPT
@@ -96,7 +102,7 @@ class BarcodeIngredientLookup {
         val credentials = "off:off"
         val auth = "Basic " + Base64.getEncoder().encodeToString(credentials.toByteArray())
         val url =
-            "https://world.openfoodfacts.net/api/v2/product/$barcode.json?fields=ingredients_text"
+            "https://world.openfoodfacts.net/api/v2/product/$barcode.json"
         val request = Request.Builder()
             .url(url)
             .addHeader("Authorization", auth)
@@ -105,40 +111,42 @@ class BarcodeIngredientLookup {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 Log.e("BarcodeLookup", "Request failed", e)
-                callback("")
+                callback("", "")
             }
             override fun onResponse(call: Call, response: Response) {
                 response.use {
                     try {
                         if (!response.isSuccessful) {
                             Log.e("BarcodeLookup", "Request failed - ${response.code}")
-                            callback("")
+                            callback("", "")
                             return
                         }
                         val body = response.body
                         if (body == null) {
                             Log.e("BarcodeLookup", "Request failed - no response body found")
-                            callback("")
+                            callback("", "")
                             return
                         }
                         val bodyString = body.string()
                         if (bodyString.isEmpty()) {
                             Log.e("BarcodeLookup", "Request failed - response body empty")
-                            callback("")
+                            callback("", "")
                             return
                         }
                         Log.d("BarcodeLookup", "Response: $bodyString")
                         val json = JSONObject(bodyString)
                         if (!json.has("product")) {
                             Log.e("BarcodeLookup", "Request failed - no product found")
-                            callback("")
+                            callback("", "")
                             return
                         }
                         val product = json.getJSONObject("product")
-                        val ingredients = product.optString("ingredients_text", "")
+                        val productName = product.optString("product_name_en", "")
+                        val ingredients = product.optString("ingredients_text_en", "")
+                        Log.d("BarcodeLookup", "Name for barcode $barcode: $productName")
                         Log.d("BarcodeLookup", "Ingredients for barcode $barcode: $ingredients")
                         //calls callback currently in MainActivity
-                        callback(ingredients)
+                        callback(productName, ingredients)
                     } catch (e: Exception) {
                         Log.e("BarcodeLookup", "Request failed - exception", e)
                     }

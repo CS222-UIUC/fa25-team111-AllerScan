@@ -105,7 +105,7 @@ class QrScanFragment : Fragment() {
         binding.tvResult.text = "Scanned: $barcode\nFetching ingredients..."
 
         // Fetch ingredients async, then evaluate and save
-        BarcodeIngredientLookup().lookupOpenFoodFacts(barcode) { ingredients ->
+        BarcodeIngredientLookup().lookupOpenFoodFacts(barcode) { productName, ingredients ->
             activity?.runOnUiThread {
                 if (_binding == null) return@runOnUiThread // Fragment destroyed
 
@@ -125,7 +125,8 @@ class QrScanFragment : Fragment() {
                 vm.saveScan(
                     Product(
                         barcode = barcode,
-                        name = "Unknown",
+                        name = productName,
+                        //safety = verdict
                         ingredients = if (ingredients.isBlank()) null else ingredients
                     )
                 )

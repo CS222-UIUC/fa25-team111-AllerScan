@@ -18,8 +18,8 @@ class HomeFragment : Fragment() {
     //MutableMap for Barcode to ProductData
     var productHistory: MutableMap<Int, ProductData> = mutableMapOf()
     //Update the productHistoryMap
-    fun addBarcodeHistory(barcode: Int) {
-        productHistory[barcode] = ProductData("Product Name", barcode.toString(), "Safe to Consume!")
+    fun addBarcodeHistory(barcode: Int, productName: String, safety: String) {
+        productHistory[barcode] = ProductData(productName, barcode.toString(), safety)
     }
 
 
