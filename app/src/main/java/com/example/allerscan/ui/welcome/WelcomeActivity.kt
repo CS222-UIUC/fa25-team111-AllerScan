@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.allerscan.MainActivity
 import com.example.allerscan.R
@@ -17,6 +18,7 @@ import com.example.allerscan.utils.PreferencesManager
 class WelcomeActivity : AppCompatActivity() {
     
     private lateinit var getStartedButton: Button
+    private lateinit var skipTextView: TextView
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +35,7 @@ class WelcomeActivity : AppCompatActivity() {
     
     private fun initializeViews() {
         try {
-            // Find the button
+            // Find the button - use correct ID from layout
             getStartedButton = findViewById(R.id.btnGetStarted)
             
             // Set click listener
@@ -41,15 +43,16 @@ class WelcomeActivity : AppCompatActivity() {
                 completeOnboarding()
             }
             
-            // Also add a skip text if it exists
-            findViewById<View>(R.id.tvSkip)?.setOnClickListener {
+            // Find skip text - use correct ID from layout
+            skipTextView = findViewById(R.id.tvSkip)
+            skipTextView.setOnClickListener {
                 completeOnboarding()
             }
             
         } catch (e: Exception) {
             Log.e("WelcomeActivity", "Error setting up views", e)
             // Add a delay then go to main anyway
-            getStartedButton?.postDelayed({
+            window.decorView.postDelayed({
                 navigateToMain()
             }, 2000)
         }
@@ -87,5 +90,8 @@ class WelcomeActivity : AppCompatActivity() {
     override fun onBackPressed() {
         // Don't allow back press on welcome screen
         // User must complete or skip
+        // This prevents users from getting stuck
+        super.onBackPressed()
+        completeOnboarding()
     }
 }
