@@ -126,8 +126,9 @@ class QrScanFragment : Fragment() {
                     Product(
                         barcode = barcode,
                         name = productName,
-                        //safety = verdict
-                        ingredients = if (ingredients.isBlank()) null else ingredients
+                        safety = verdict,
+                        dateScanned = System.currentTimeMillis().toString()
+                        //ingredients = if (ingredients.isBlank()) null else ingredients
                     )
                 )
 
