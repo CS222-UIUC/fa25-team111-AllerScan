@@ -51,8 +51,33 @@ The Backend: In the backend, AllerScan uses the Room functionality to create a l
 
 ### Profile + General UI + Backend Utilization - Rami
 
+#### Profile Page:
+
+
+#### General UI:
+
+
+#### Backend Utilization:
+
 
 ## Installation
+There are multiple ways to install the application:
+### Method 1 - Install APK from Releases:
+In releases, install the APK file.
+Once
+
+### Method 2 - Android Studio:
+1. The application can also be installed via Android Studio, which can be installed [here](https://developer.android.com/studio). 
+2. In Android Studio, you will be prompted to download the Android SDK, which you should accept.
+3. Once in Android Studio, pull from main and press "Sync with Gradle" after pressing the top left button, a directory warning should pop up letting you know that it will search for the default SDK location, press OK to continue.
+4. On the top right, you should see a hammer icon. This will build the project. Press the hammer icon.
+5. Once the project is done building, you can do either two things.<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Option 1. Press the green play button at the top of the screen, which will run the app in the emulator.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Option 2. Plug in an Android device with developer options enabled and USB debugging enabled. If you don't know how to do that, then &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;look to [Google's Developer Guides](https://developer.android.com/studio/debug/dev-options**), as they are quite detailed.  Then press the green button to install the app locally on your Android &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;phone.<br>
+
+6. Enjoy AllerScan!   
+
 
 
 ## Contributors 
