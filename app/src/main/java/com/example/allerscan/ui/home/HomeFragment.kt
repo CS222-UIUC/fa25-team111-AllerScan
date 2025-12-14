@@ -56,7 +56,7 @@ class HomeFragment : Fragment() {
         binding.searchBarcodeHistory.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 val barcode = query.orEmpty().trim()
-                if (barcode.length != 12) {
+                if (barcode.length < 10 || barcode.length > 14) {
                     Toast.makeText(requireContext(), "Enter valid barcode (must be 12 digits).", Toast.LENGTH_LONG).show()
                     return false
                 }
