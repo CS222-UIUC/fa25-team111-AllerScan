@@ -7,7 +7,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-@Database(entities = [Product::class, Allergen::class], version = 3)
+@Database(entities = [Product::class, Allergen::class], version = 4)
 abstract class ProductDatabase : RoomDatabase() {
     abstract fun productDao(): ProductDao
     abstract fun allergenDao(): AllergenDao

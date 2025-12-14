@@ -73,7 +73,7 @@ class barcodeSearchFragment : Fragment() {
                     }
                 }
             } else {
-                Toast.makeText(requireContext(), "Please Enter a Valid Barcode (Must be 12 digits)", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Please Enter a Valid Barcode (Must be 12 digits)", Toast.LENGTH_LONG).show()
             }
             binding.inputBarcode.getText().clear()
         }
