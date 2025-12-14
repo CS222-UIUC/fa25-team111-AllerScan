@@ -1,6 +1,7 @@
 package com.example.allerscan.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.allerscan.databinding.FragmentHomeBinding
 import com.example.allerscan.R
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.fragment.app.activityViewModels
@@ -38,6 +40,7 @@ class HomeFragment : Fragment() {
         customProductAdapter = ProductRecyclerView()
         binding.productRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.productRecyclerView.adapter = customProductAdapter
+        productSearchListener()
         productViewModel.allProducts.observe(viewLifecycleOwner) { products ->
             customProductAdapter.addProductList(products)
             //If no products scanned, show add product text
@@ -52,6 +55,28 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
+    //Product Search Bar
+    private fun productSearchListener() {
+        binding.searchBarcodeHistory.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    val barcode = query.orEmpty().trim()
+                    if (barcode.length != 12) {
+                        Toast.makeText(requireContext(), "Enter valid barcode (must be 12 digits).", Toast.LENGTH_LONG).show()
+                        return false
+                    }
+                    val found = productViewModel.search(barcode)
+                    if (!found) {
+                        Toast.makeText(requireContext(), "Barcode was not previously scanned. Scan barcode to view product.", Toast.LENGTH_LONG).show()
+                    }
+                    return true
+                }
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    return false
+                }
+        })
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
