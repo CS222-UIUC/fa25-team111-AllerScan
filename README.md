@@ -45,13 +45,23 @@ The Backend: In the backend, AllerScan uses the Room functionality to create a l
 
 ### Welcome Screen - Luke
 <p align="center">
-<img width="197" height="440" alt="image" src="https://github.com/user-attachments/assets/ecb04aa8-7552-4038-b4fc-b57788063cd4" />
-<img width="192" height="437" alt="image" src="https://github.com/user-attachments/assets/b8b811ae-2fe6-405a-9316-6c72653a8c14" />
-<img width="196" height="441" alt="image" src="https://github.com/user-attachments/assets/250416f5-dd91-4e6d-8a13-f0d3450679d7" />
+<img width="195" height="440" alt="image" src="https://github.com/user-attachments/assets/ecb04aa8-7552-4038-b4fc-b57788063cd4" />
+<img width="195" height="440" alt="image" src="https://github.com/user-attachments/assets/b8b811ae-2fe6-405a-9316-6c72653a8c14" />
+<img width="195" height="440" alt="image" src="https://github.com/user-attachments/assets/250416f5-dd91-4e6d-8a13-f0d3450679d7" />
 </p>
 <p align="center">
 First&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Second&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Third <br>
 </p>
+
+The Welcome Screen is split into three different screens which are traversed through by a "NEXT" button in the bottom right of each slide, or has the option of skipping the tutorial activity by pressing "Skip" in the bottom left.
+
+The first screen introduces the user to the scanning element of the app, stating "Scan Products - Quickly scan barcodes to check for allergens in food products" in a short block of text. There is also an attached icon representing scanning above this text. The first android symbol at the bottom is also illuminated, representing it as the first page in the welcome activity. The user is expected to press the "NEXT" button in order to move to the second page.
+
+The second screen mentions the efficiency/quickness of the app, stating "Instant Results - Get immediate allergen information from our comprehensive database" in a short block of text. There is also an attached icon representing the database above this text. The second android symbol at the bottom is also illuminated, representing it as the second page in the welcome activity. The user is expected to press the "NEXT" button in order to move to the third page.
+
+The third screen introduces the user to the profile element of the app, stating "Manage Your Profile - Set up your allergen profile to get personalized warnings" in a short block of text. There is also an attached icon representing profiles above this text. The third android symbol at the bottom is also illuminated, representing it as the third page in the welcome activity. The user is expected to press the "NEXT" button in order to move to the actual app.
+
+Once the user has gone through the welcome screen one time, the app stores this data and will not prompt the user beyond its first time being opened. This is effective so the user can have a seamless/satisfying experience whenever they open the app in the future.
 
 ### Backend + Camera Implementation - Aadam
 
