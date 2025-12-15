@@ -17,7 +17,7 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
         //If product searched and found, updates the timestamp so the product appears on top of the list
         if (barcode.isEmpty()) return false
         if (barcode.isBlank()) return false
-        if (barcode.length != 12) return false
+        //if (barcode.length != 12) return false
         var updated = false
         viewModelScope.launch {
             val found = dao.findProduct(barcode)
