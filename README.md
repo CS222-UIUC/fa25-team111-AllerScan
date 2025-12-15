@@ -44,6 +44,14 @@ The Backend: In the backend, AllerScan uses the Room functionality to create a l
 
 
 ### Welcome Screen - Luke
+<p align="center">
+<img width="197" height="440" alt="image" src="https://github.com/user-attachments/assets/ecb04aa8-7552-4038-b4fc-b57788063cd4" />
+<img width="192" height="437" alt="image" src="https://github.com/user-attachments/assets/b8b811ae-2fe6-405a-9316-6c72653a8c14" />
+<img width="196" height="441" alt="image" src="https://github.com/user-attachments/assets/250416f5-dd91-4e6d-8a13-f0d3450679d7" />
+</p>
+<p align="center">
+First&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Second&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Third <br>
+</p>
 
 ### Backend + Camera Implementation - Aadam
 
