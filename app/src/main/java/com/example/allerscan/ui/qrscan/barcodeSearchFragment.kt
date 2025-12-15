@@ -35,7 +35,7 @@ class barcodeSearchFragment : Fragment() {
     private fun setupClickListeners() {
         binding.buttonBarcode.setOnClickListener {
             val barcode = binding.inputBarcode.text.toString()
-            if (barcode.isNotBlank() && barcode.length == 12) {
+            if (barcode.isNotBlank() && (barcode.length >= 10 && barcode.length <= 14)) {
                 //try to make ingredient call
                 val productIngredients = BarcodeIngredientLookup()
                 val allergenCheck = AllergenChecker()
@@ -73,7 +73,7 @@ class barcodeSearchFragment : Fragment() {
                     }
                 }
             } else {
-                Toast.makeText(requireContext(), "Please Enter a Valid Barcode (Must be 12 digits)", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Please Enter a Valid Barcode (Must be 12 digits)", Toast.LENGTH_LONG).show()
             }
             binding.inputBarcode.getText().clear()
         }
