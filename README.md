@@ -94,7 +94,7 @@ Once
 5. Once the project is done building, you can do either of two things.<br>
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Option 1. Press the green play button at the top of the screen, which will run the app in the emulator.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Option 2. Plug in an Android device with developer options enabled and USB debugging enabled. If you don't know how to do that, then look to [Google's Developer Guides](https://developer.android.com/studio/debug/dev-options**), as they are quite detailed.  Then press the green button to install the app locally on your Android &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;phone.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Option 2. Plug in an Android device with developer options enabled and USB debugging enabled. If you don't know how to do that, then look to [Google's Developer Guides](https://developer.android.com/studio/debug/dev-options**), &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;as they are quite detailed. Then press the green button to install the app locally on your Android phone.<br>
 
 6. Enjoy AllerScan!   
 
