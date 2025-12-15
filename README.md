@@ -49,16 +49,36 @@ The Backend: In the backend, AllerScan uses the Room functionality to create a l
 
 ### History + API Related Features - Anna
 
-### Profile + General UI + Backend Utilization - Rami
+### Profile/Backend Utilization + General UI/Testing - Rami
 
-#### Profile Page:
+#### Profile Page + Backend Utilization:
+<p align="center">
+<img width="202.5" height="450" alt="image" src="https://github.com/user-attachments/assets/663537c9-cb6f-4d6a-8b56-7bcaa204a024" />
+<img width="202.5" height="450" alt="image" src="https://github.com/user-attachments/assets/c3b633a0-d7cd-40fd-b84d-b53f30cfbdca" />
+<img width="202.5" height="450" alt="image" src="https://github.com/user-attachments/assets/b6c16a54-a29e-4304-8961-fd2b2a488e2f" />
+</p>
+<p align="center">
+Overview&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Custom Allergen <br>
+</p>
+The Profile page seen above is broken into three sections, with all of it being written in Kotlin and with SQL for accessing the database:
 
+The first page the user will see is the "Overview" page. It displays the user's name, along with their currently active allergens. It pulls the active allergens from the local database when the page is opened so that it can update in real-time after editing a profile.
+To edit the profile, the user can press the pen icon in the top right.
 
-#### General UI:
+The second page is the edit page, where the user can change their listed name, use the checkboxes to easily add major allergens (those seen in the big bold **CONTAINS** sections of labels), choose to add custom allergens, or delete all user data from the app at once.
+When entering the edit page, the activated checkboxes will be pre-selected based on their activation status so the user can change their allergens as needed without having to recreate their whole profile. Pressing on a checkbox will change the activation status of that allergen to whatever it currently isn't in the database (so true to false, false to true). Pressing the delete button in the bottom left will set all activation values in the database to false while also clearing out the user's name. The save button on the top right (where the pen icon was) will bring the user back to the previous page, saving all changes.
 
+The last page is where the user can add custom allergens after pressing the "ADD CUSTOM ALLERGEN" button while editing their profile. It works exactly as one would expect. The user types in the allergen in the top bar, and when they press "ADD", the allergen will be added to the database with its activation status set to true. The allergen will also be seen below this bar, showing the user all their current custom allergens, along with giving them the ability to delete custom allergens as needed by pressing the "X" to the right of the allergen. Pressing the "X" will remove the allergen from the screen and set its activation value to false.
 
-#### Backend Utilization:
+Once the profile page is completed and the user has declared their allergens, the database will now contain all the user info needed to cross-check against food labels, enabling the ability to approve or deny the safety of scanned food products.
 
+#### General UI + Testing:
+
+To ensure compatibility with many devices, and as the only developer using an Android device, I was in charge of ensuring the user interface was both clean and compatible with multiple devices. I was also in charge of testing AllerScan outside of the developer environment due to having a developer-enabled phone. 
+
+General UI: Throughout the entire project, I adjusted and changed UI elements as they were created to ensure they were uniform across pages while also adjusting the calculations for object positioning to ensure device compatibility. The calculations are now mostly reliant on the positionings of the screen boundaries, enabling UI elements to shift automatically based on screen size. This way, the app looks the same for all devices, has no UI element being overlapped by another, and shares a uniform theme across all pages, creating a seamless user experience.  
+
+Testing: Testing each branch and PR with my own device made it possible to test certain functionality, like camera barcode scanning, user data persistence, UI element positioning, and real-world use in stores when shopping, all things that cannot be done in the emulator. This was done to ensure that all functions of the app were maintained during development, with none being silently broken due to a PR. Using the app allowed me to create feedback that otherwise could not be seen in the emulator due to its constraints, allowing team members and me to take that info and make changes based on it. Testing in my daily life has drastically changed the project for the better, as I ran into scenarios that none of us thought of during development.
 
 ## Installation
 There are multiple ways to install the application:
@@ -71,7 +91,7 @@ Once
 2. In Android Studio, you will be prompted to download the Android SDK, which you should accept.
 3. Once in Android Studio, pull from main and press "Sync with Gradle" after pressing the top left button, a directory warning should pop up letting you know that it will search for the default SDK location, press OK to continue.
 4. On the top right, you should see a hammer icon. This will build the project. Press the hammer icon.
-5. Once the project is done building, you can do either two things.<br>
+5. Once the project is done building, you can do either of two things.<br>
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Option 1. Press the green play button at the top of the screen, which will run the app in the emulator.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Option 2. Plug in an Android device with developer options enabled and USB debugging enabled. If you don't know how to do that, then &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;look to [Google's Developer Guides](https://developer.android.com/studio/debug/dev-options**), as they are quite detailed.  Then press the green button to install the app locally on your Android &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;phone.<br>
