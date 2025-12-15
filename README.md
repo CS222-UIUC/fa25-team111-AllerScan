@@ -100,11 +100,15 @@ Testing: Testing each branch and PR with my own device made it possible to test 
 
 ## Installation
 There are multiple ways to install the application:
-### Method 1 - Install APK from Releases:
-In releases, install the APK file.
-Once
+### Method 1 - Install APK from Releases - App Usage Only (No Code):
+1. Ensure you have a device running Android or an emulator like BlueStacks. If you are using an Android device, we recommend following these steps directly from the device rather than from a computer.
+2. Go to the releases page of the AllerScan GitHub repository
+3. Download "AllerScan.apk"
+4. Import the APK into your emulator and install, or if on a device running Android, open the downloads/files application and run the APK.
+5. You may be prompted to enable the downloads of unsigned software and a Google Play Security scan of the application. Enable/Accept both of these and allow the scan to run if needed.
+6. The AllerScan app should now be installed on your device and ready for use!
 
-### Method 2 - Android Studio:
+### Method 2 - Android Studio - App Usage with Access to Code:
 1. The application can also be installed via Android Studio, which can be installed [here](https://developer.android.com/studio). 
 2. In Android Studio, you will be prompted to download the Android SDK, which you should accept.
 3. Once in Android Studio, pull from main and press "Sync with Gradle" after pressing the top left button, a directory warning should pop up letting you know that it will search for the default SDK location, press OK to continue.
