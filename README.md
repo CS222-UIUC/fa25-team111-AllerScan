@@ -1,4 +1,4 @@
-# AllerScan
+r# AllerScan
 Nearly 1 in 11 people have food allergies in the United States of America. For those in that group, their allergies control the food they buy, avoid, and consume. Allergens also take away precious time, with 3 to 5 minutes per product on average being used to decide on a purchase based on the allergens from the label. Our app AllerScan is a solution that gives users the comfort of safety in their food purchases, along with giving back the time wasted by staring at food labels.
 
 AllerScan is an Android mobile app that uses food product barcodes to check food labels and informs the user whether a product is safe to consume. AllerScan achieves this by using the mobile phone's built-in camera to scan barcodes, with manual barcode insertion available as needed. When creating a profile, the user will be asked to insert their allergens, which, when a barcode is scanned, will be cross-checked against the food label's listed ingredients. All of this happens within seconds, saving the user minutes of reading and eye strain with a quick response prioritizing user safety above all else. 
@@ -64,7 +64,9 @@ The third screen introduces the user to the profile element of the app, stating 
 Once the user has gone through the welcome screen one time, the app stores this data and will not prompt the user beyond its first time being opened. This is effective so the user can have a seamless/satisfying experience whenever they open the app in the future.
 
 ### Backend + Camera Implementation - Aadam
-
+<p align="center">
+  <img width="336" height="748" alt="Syrup Scan Example" src="https://github.com/user-attachments/assets/0e7de612-1458-49ab-ad67-42e9c3f2fb3b" />
+</p>
 ### History + API Related Features - Anna
 
 ### Profile/Backend Utilization + General UI/Testing - Rami
@@ -128,4 +130,38 @@ Option 2. Plug in an Android device with developer options enabled and USB debug
 
 
 ## Contributors 
+### Roles/Responsibilities:
+Rami Nasser (rnass2) <br>
+Backend:
+* Store user information locally on device using Room database
+* Tie frontend actions to backend updates
+* Active/deactivate user allergens <br>
+
+Frontend:
+* UI for adding allergens to a user profile
+* Generalize UI and ensure cross-device uniformity
+* Testing UI to backend functionality <br>
+  
+Anna Koziol (akozi) <br>
+Backend:
+* Barcode lookup, fetching ingredients from the APIs
+* Identifying how to separate ingredients to check for allergens
+* Confirming if allergen was found or not <br>
+
+Frontend:
+* UI for all screens (profile/allergen list, history, and camera scanner)
+* Redirecting the screens from one another/making the buttons <br>
+
+Aadam Hitchens (ahitc2) <br>
+Backend:
+* Clean/Optimize data from QR code scan
+* Setup baseline database to expand upon <br>
+
+Frontend:
+* Get camera functioning <br>
+
+Luke Jacob (ljaco5) <br>
+Frontend:
+* Make Welcome Page
+
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/19BwrNgF)
