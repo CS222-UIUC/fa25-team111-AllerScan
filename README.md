@@ -100,6 +100,11 @@ Testing: Testing each branch and PR with my own device made it possible to test 
 
 ## Installation
 There are multiple ways to install the application:
+
+**NOTE:** AllerScan currently does not support dark mode. Please use light mode when running the app. 
+
+**ISSUE + WORK AROUND:** Some devices don't ask for camera permission when entering the scan page. We are looking into it, but for now, you can manually enable camera permission for AllerScan in the app settings built into your phone.
+
 ### Method 1 - Install APK from Releases - App Usage Only (No Code) - Faster, Meant for Easy Usage:
 1. Ensure you have a device running Android or an emulator like BlueStacks. If you are using an Android device, we recommend following these steps directly from the device rather than from a computer.
 2. Go to the releases page of the AllerScan GitHub repository
