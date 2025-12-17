@@ -17,8 +17,9 @@ Below is a visual demonstration of how AllerScan functions between different lay
 </p>
 
 <p align="center">
-  <img width="657" height="473" alt="image" src="https://github.com/user-attachments/assets/6e73af3d-b8fc-42a2-946c-58fbe92d88b0" />
+  <img width="615" height="464" alt="Screenshot 2025-12-17 135755" src="https://github.com/user-attachments/assets/f90c94c4-8652-4c99-814d-a2c875957a7b" />
 </p>
+
 
 The Frontend: The user is prompted to create their profile, which allows AllerScan to compare allergens when scanning food labels. Once the user has created their profile, they can start scanning barcodes. The user can go to the scan page and enable camera permissions to allow AllerScan to scan and interpret barcodes. The end result will be displayed at the bottom of the screen and will be stored in the history page. 
 
