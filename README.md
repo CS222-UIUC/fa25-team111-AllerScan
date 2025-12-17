@@ -67,6 +67,7 @@ Once the user has gone through the welcome screen one time, the app stores this 
 <p align="center">
   <img width="336" height="748" alt="Syrup Scan Example" src="https://github.com/user-attachments/assets/0e7de612-1458-49ab-ad67-42e9c3f2fb3b" />
 </p>
+
 ### History + API Related Features - Anna
 
 ### Profile/Backend Utilization + General UI/Testing - Rami
