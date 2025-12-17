@@ -70,6 +70,43 @@ Once the user has gone through the welcome screen one time, the app stores this 
 
 ### History + API Related Features - Anna
 
+<p align="center">
+<img width="285" height="629" alt="Screenshot 2025-12-14 235246" src="https://github.com/user-attachments/assets/4b1c6160-740f-446d-9f8b-196ea3069278" />
+</p>
+<p align="center">
+  The History Screen
+</p>
+
+#### The History Screen
+The History screen displays previously scanned products from both the camera-based scanning feature and the manual barcode entry option. The History screen utilizes SQL for accessing the Room database to access previously scanned products. A RecyclerView was utilized to display the products as it allows users to scroll through products off the screen. The search feature allows users to find previously scanned products by barcode, as the searched product will appear at the top of the list.
+<p align="center">
+  Demonstration of Product Properties in Room Database
+</p>
+<p align="center">
+<img width="712" height="505" alt="Screenshot 2025-12-17 131959" src="https://github.com/user-attachments/assets/164d9427-cce3-4346-a7c8-d25bde2a5283" />
+</p>
+
+
+
+<p align="center">
+<img width="257" height="54" alt="Screenshot 2025-12-14 210600" src="https://github.com/user-attachments/assets/4ccc6153-38fe-4a56-b34f-538a78beef2c" />
+</p>
+<p align="center">
+  The Manual Barcode Insertion Feature
+</p>
+
+#### Manual Barcode Insertion Feature
+The manual barcode insert feature was an additional protocol taken to ensure the user can check an item in case the user experienced issues with the camera. Similar to the camera, the barcode insertion feature retrieves the barcode, sends API request, analyzes ingredients, makes a safety verdict and saves the product information in the database.
+
+
+<p align="center">
+<img width="313" height="75" alt="Screenshot 2025-12-14 202034" src="https://github.com/user-attachments/assets/c814bdd8-09e8-42fc-82a1-150e697ab91d" />
+</p>
+
+#### API Requests and Handling
+After further evaluation of our primary researched APIs, OpenFoodFacts was found to be the most reliable and completely free to use. Other previously brainstormed APIs included, LookupGoUPC, UPCindex and UPCitembd. All classes and functions for API requests and handling were written in Kotlin. After scanning or entering a barcode, an API request is sent to fetch the product name and ingredients of the product. The ingredients result is then cleaned of brackets, parentheses, slashes, and commas. Certain unnecessary terms such as “and”, “high” and “unbleached” are thrown out as well. This preserves the necessary food ingredient information. This resulting parsed ingredients are then checked for the users allergens. The Allergen Checker class was created to check the parsed list of ingredients meanwhile ensuring entered multi-word custom allergens were checked correctly. The ingredient parsing and allergen checking was tested against multiple items to provide valid verdicts.
+
+
 ### Profile/Backend Utilization + General UI/Testing - Rami
 
 #### Profile Page + Backend Utilization:
