@@ -193,13 +193,15 @@ Frontend:
   
 Anna Koziol (akozi) <br>
 Backend:
-* Barcode lookup, fetching ingredients from the APIs
+* Barcode lookup, fetching ingredients from the API
 * Identifying how to separate ingredients to check for allergens
-* Confirming if allergen was found or not <br>
+* Confirming if allergen was found or not
+* Storing product information with Room Database <br>
 
 Frontend:
-* UI for all screens (profile/allergen list, history, and camera scanner)
-* Redirecting the screens from one another/making the buttons <br>
+* UI for screens (history screen and camera manual insertion feature)
+* Ensure cross-device uniformity of UI screens and features 
+* Redirecting the screens from one another <br>
 
 Aadam Hitchens (ahitc2) <br>
 Backend:
