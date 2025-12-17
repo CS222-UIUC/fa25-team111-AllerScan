@@ -68,6 +68,16 @@ Once the user has gone through the welcome screen one time, the app stores this 
   <img width="336" height="748" alt="Syrup Scan Example" src="https://github.com/user-attachments/assets/0e7de612-1458-49ab-ad67-42e9c3f2fb3b" />
 </p>
 
+The backend and camera layers of AllerScan are responsible for turning a raw barcode captured via your device's camera into a safe/unsafe decision that is then stored and shown across the app.
+
+On the camera side, AllerScan uses Android's CameraX API inside a dedicated scan fragment. When the user navigates to the Scan tab, the fragment will request camera permission if needed. Once the camera is working, in parallel, an image analysis is attatched and runs on each frame. As soon as a valid barcode is detected, the analyzer will stop scanning and passes the numeric barcode value to the backend layer.
+
+The backend functions as such:
+
+1. Network/API client - A request handler builds a URL to the public Open Food Facts API using the scanned barcode, performing an HTTP GET request and extracting the product name plus a normalized list of ingredients.
+2. Pre-processing scanned data - Making sure that the barcode from CameraX is validated (trimming, checking format, ignoring bad reads), check to make sure there isn't duplicate reads.
+3. Recorded entries - After a scan, a data entry is created and saved via Room. Each record includes at least a product name, barcode, and whether it was safe/unsafe, and which allergens were triggered (if any). This will later be utilized in our History page.
+
 ### History + API Related Features - Anna
 
 <p align="center">
@@ -142,7 +152,7 @@ Testing: Testing each branch and PR with my own device made it possible to test 
 There are multiple ways to install the application:
 
 **NOTE:** AllerScan currently does not support dark mode. Please use light mode when running the app. 
-
+ 
 **ISSUE + WORK AROUND:** Some devices don't ask for camera permission when entering the scan page. We are looking into it, but for now, you can manually enable camera permission for AllerScan in the app settings built into your phone.
 
 ### Method 1 - Install APK from Releases - App Usage Only (No Code) - Faster, Meant for Easy Usage:
